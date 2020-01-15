@@ -1,0 +1,8 @@
+{% extends 'index.html' %}
+{% block content %}
+{% for i in url %}
+<div>
+    <a href='{{i.url}}'>{{i.format}}</a>
+</div>
+{% endfor %}
+{% endblock %}
