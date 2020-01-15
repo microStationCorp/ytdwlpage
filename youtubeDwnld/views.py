@@ -37,4 +37,4 @@ def crawl(request):
             'format': f"{item['format']}",
             'url': f"{item['url']}"
         })
-    return render(request, 'crawling.html', {'url': html})
+    return render(request, 'crawling.html', {'url': html, 'thnl': result['thumbnail'], 'title': result['title']})
