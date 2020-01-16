@@ -1,24 +1,70 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-	<title>Welcome to YouTube MP3 Converter Online</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+	<title>YouTube Downloader</title>
+	<style>
+		.myBtn {
+			width: 120px;
+		}
+
+		.headFont {
+			font-family: 'Raleway', sans-serif;
+			font-size: 65px;
+			font-weight: bold;
+			color: rgba(7, 86, 105, 0.842);
+			text-shadow: 4px 5px 6px rgba(7, 141, 251, 0.746);
+		}
+
+		.btn:hover {
+			background-color: rgb(251, 108, 110);
+		}
+
+		.btn-font {
+			font-family: 'Ubuntu', sans-serif;
+			font-size: 20px;
+			padding: 0px;
+		}
+	</style>
 </head>
 
 <body>
+	<div class="container">
 
-	<form action="/crawl" method="GET">
-		<h1 class="heading1">convert Youtube Videos and Download MP3 Format</h1>
+		<h1 class="text-center mt-4 headFont">YouTube Downloader</h1>
+		<form action="/crawl" method="GET">
+			<div class="input-group mb-3 mt-5 col-sm-11 mx-auto">
+				<input type="text" class="form-control"
+					placeholder="YouTube link , e.g:https://www.youtube.com/watch?v=67aR580Yqw8"
+					aria-label="YouTube link" aria-describedby="button-addon2" name="urlBox">
+				<div class="input-group-append">
+					<button class="btn btn-success myBtn btn-font" type="submit" id="button-addon2">Convert</button>
+				</div>
+			</div>
+		</form>
 
-		<input class="url" placeholder="Paste youtube video link here" name="urlBox">
-
-		<button type="submit" class="btn">Covert Now</button>
-	</form>
+	</div>
 	{% block content %}
 	{% endblock %}
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
 </body>
 
 </html>
