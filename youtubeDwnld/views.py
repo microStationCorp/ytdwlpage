@@ -35,11 +35,12 @@ def home(request):
             })
 
             for format in formats:
+                list = format['format'].split(' - ')
                 if format['height'] != None and format['width'] != None:
                     if format['asr'] == None and format['fps'] != None:
                         html['formats']['videoWoAudio'].append({
                             'ext': f"{format['ext']}",
-                            'format': f"{format['format']}",
+                            'format': f"{list[1]}",
                             'url': f"{format['url']}",
                             'asr': f"{format['asr']}",
                             'fps': f"{format['fps']}"
@@ -47,7 +48,7 @@ def home(request):
                     else:
                         html['formats']['video'].append({
                             'ext': f"{format['ext']}",
-                            'format': f"{format['format']}",
+                            'format': f"{list[1]}",
                             'url': f"{format['url']}",
                             'asr': f"{format['asr']}",
                             'fps': f"{format['fps']}"
@@ -55,15 +56,16 @@ def home(request):
                 elif format['height'] == None and format['width'] == None:
                     html['formats']['audio'].append({
                         'ext': f"{format['ext']}",
-                        'format': f"{format['format']}",
+                        'format': f"{list[1]}",
                         'url': f"{format['url']}",
                         'asr': f"{format['asr']}",
-                        'fps': f"{format['fps']}"
+                        'fps': f"{format['fps']}",
+                        'abr': f"{format['abr']}"
                     })
                 else:
                     html['formats']['others'].append({
                         'ext': f"{format['ext']}",
-                        'format': f"{format['format']}",
+                        'format': f"{list[1]}",
                         'url': f"{format['url']}",
                         'asr': f"{format['asr']}",
                         'fps': f"{format['fps']}"
