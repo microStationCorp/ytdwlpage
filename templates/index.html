@@ -13,8 +13,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 	<title>YouTube Downloader</title>
 	<style>
-		.myBtn {
-			width: 120px;
+		body {
+			background-color: rgba(8, 177, 207, 0.842);
 		}
 
 		.headFont {
@@ -25,36 +25,163 @@
 			text-shadow: 4px 5px 6px rgba(7, 141, 251, 0.746);
 		}
 
-		.btn:hover {
-			background-color: rgb(251, 108, 110);
-		}
-
 		.btn-font {
 			font-family: 'Ubuntu', sans-serif;
 			font-size: 20px;
 			padding: 0px;
 		}
+
+		#downloadTab a {
+			margin-top: 10px;
+			margin-left: 10px;
+			color: white;
+		}
+
+		.input-group-prepend span {
+			font-size: 16.4px;
+			width: 70px;
+			font-weight: bold;
+		}
+
+		.color-change {
+			border-radius: 5px;
+			padding: 4px 25px;
+			cursor: pointer;
+			color: #fff;
+			background-color: #00A6FF;
+			font-size: 18px;
+			font-family: 'Roboto';
+			font-weight: 100;
+			border: 1px solid #fff;
+			box-shadow: 2px 2px 5px #AFE9FF;
+			transition-duration: 0.5s;
+			-webkit-transition-duration: 0.5s;
+			-moz-transition-duration: 0.5s;
+		}
+
+		.color-change:hover {
+			color: #006398;
+			border: 1px solid #006398;
+			box-shadow: 2px 2px 20px #AFE9FF;
+		}
+
+		button.color-change {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+		}
+
+		hr {
+			border-top: 1px solid #0169D9;
+		}
+
+		.boxShadow {
+			box-shadow: 5px 10px 18px #888888
+		}
 	</style>
 </head>
 
 <body>
-	<div class="container">
 
-		<h1 class="text-center mt-4 headFont">YouTube Downloader</h1>
-		<form action="/crawl" method="GET">
+	<div class="container card mt-2">
+		<div class="card-title headFont my-5 py-3 text-center">
+			YouTube Downloader
+		</div>
+	</div>
+
+	<div class="container mb-5">
+		<form action="" method="GET">
 			<div class="input-group mb-3 mt-5 col-sm-11 mx-auto">
-				<input type="text" class="form-control"
-					placeholder="YouTube link , e.g:https://www.youtube.com/watch?v=67aR580Yqw8"
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">URL</span>
+				</div>
+				<input type="text" class="form-control" placeholder="e.g : https://www.youtube.com/watch?v=67aR580Yqw8"
 					aria-label="YouTube link" aria-describedby="button-addon2" name="urlBox">
 				<div class="input-group-append">
-					<button class="btn btn-success myBtn btn-font" type="submit" id="button-addon2">Convert</button>
+					<button class="color-change btn-font" type="submit" id="button-addon2">Convert</button>
 				</div>
 			</div>
 		</form>
-
 	</div>
-	{% block content %}
-	{% endblock %}
+
+	{% if aflag %}
+
+	<div class="container card mb-3">
+		<div class="card-body">
+			<div class="row">
+				<div class="col">
+					<div class="card border-info text-center mx-auto my-4 boxShadow" style="width: 24rem;">
+						<div class="card-body">
+							<img class="card-img-top" src="{{dataDict.thumbnail}}" alt="Card image cap">
+						</div>
+						<div class="card-body">
+							<h5 class="card-title">{{dataDict.title}}</h5>
+							<hr>
+							<h6 class="card-subtitle mb-2 text-muted border-info">
+								{{dataDict.uploader}}</h6>
+							<hr>
+							<p class="card-text">{{dataDict.description}}</p>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div id="downloadTab">
+						<div class="panel panel-default my-3">
+							<h5 class="panel-heading">
+								Video
+							</h5>
+							<div class="panel-body">
+								{% for item in dataDict.formats.video %}
+								<a href="{{item.url}}" class="btn btn-primary boxShadow" style=" min-width: 140px;"
+									role="button">{{item.ext}} {{item.format}}</a>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="panel panel-default my-3">
+							<h5 class="panel-heading">
+								Video (Without sound)
+							</h5>
+							<div class="panel-body">
+								{% for item in dataDict.formats.videoWoAudio %}
+								<a href="{{item.url}}" class="btn btn-primary boxShadow" style=" min-width: 140px;"
+									role="button">{{item.ext}} {{item.format}}</a>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="panel panel-default my-3">
+							<h5 class="panel-heading">
+								Audio
+							</h5>
+							<div class="panel-body">
+								{% for item in dataDict.formats.audio %}
+								<a href="{{item.url}}" class="btn btn-primary boxShadow" style=" min-width: 140px;"
+									role="button">{{item.ext}} {{item.format}}</a>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% elif eflag %}
+	<div class="container  mb-3">
+		<div class="alert alert-danger" role="alert">
+			<h4 class="alert-heading">Error!</h4>
+			<p>Ooops...... You have entered an <strong>invalid YouTube link</strong>.......</p>
+		</div>
+	</div>
+	{% elif mflag %}
+	<div class="container  mb-3">
+		<div class="alert alert-danger" role="alert">
+			<h4 class="alert-heading">Warning!</h4>
+			<p>Ooops...... You have entered an YouTube link which is a link of <strong>YouTube Playlist</strong>. Please
+				not enter <strong>YouTube Playlist link</strong></p>
+		</div>
+	</div>
+	{% else %}
+
+	{% endif %}
 
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
