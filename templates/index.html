@@ -81,7 +81,31 @@
 </head>
 
 <body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+			aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<a class="navbar-brand" href="#">YTDownloader</a>
 
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item">
+					<a class="nav-link" href="../">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/documentation">Documentation</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/contactUs">Contact us</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/dmca">DMCA</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	{% block content %}
 	<div class="container card mt-2">
 		<div class="card-title headFont my-5 py-3 text-center">
 			YouTube Downloader
@@ -132,7 +156,7 @@
 							<div class="panel-body">
 								{% for item in dataDict.formats.video %}
 								<a href="{{item.url}}" class="btn btn-primary boxShadow" style=" min-width: 140px;"
-									role="button">{{item.ext}} {{item.format}}</a>
+									role="button" download>{{item.ext}} {{item.format}}</a>
 								{% endfor %}
 							</div>
 						</div>
@@ -144,17 +168,6 @@
 								{% for item in dataDict.formats.videoWoAudio %}
 								<a href="{{item.url}}" class="btn btn-primary boxShadow" style=" min-width: 140px;"
 									role="button">{{item.ext}} {{item.format}}</a>
-								{% endfor %}
-							</div>
-						</div>
-						<div class="panel panel-default my-3">
-							<h5 class="panel-heading">
-								Audio
-							</h5>
-							<div class="panel-body">
-								{% for item in dataDict.formats.audio %}
-								<a href="{{item.url}}" class="btn btn-primary boxShadow" style=" min-width: 140px;"
-									role="button">{{item.ext}} {{item.abr}} kbps</a>
 								{% endfor %}
 							</div>
 						</div>
@@ -183,6 +196,7 @@
 
 	{% endif %}
 
+	{% endblock %}
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
 		crossorigin="anonymous"></script>

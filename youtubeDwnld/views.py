@@ -76,3 +76,13 @@ def home(request):
             return render(request, 'index.html', {'eflag': 'True'})
     else:
         return render(request, 'index.html')
+
+
+def dmca(request):
+    return render(request, 'DMCA.html')
+    
+def cu(request):
+    return render(request, 'cu.html')
+
+def docp(request):
+    return render(request, 'docpage.html')
