@@ -42,13 +42,14 @@
 			</ul>
 		</div>
 	</nav>
-	{% block content %}
-	<div class="container card mt-2">
-		<div class="card-title headFont my-5 py-3 text-center">
+
+	<div class="container mt-2 headBG">
+		<div class="headFont my-3 py-5 text-center">
 			YouTube Downloader
 		</div>
 	</div>
 
+	{% block content %}
 	<div class="container mb-5">
 		<form action="" method="GET">
 			<div class="input-group mb-3 mt-5 col-sm-11 mx-auto">
@@ -123,10 +124,27 @@
 	</div>
 	{% elif mflag %}
 	<div class="container  mb-3">
-		<div class="alert alert-danger" role="alert">
-			<h4 class="alert-heading">Warning!</h4>
-			<p>Ooops...... You have entered an YouTube link which is a link of <strong>YouTube Playlist</strong>. Please
-				not enter <strong>YouTube Playlist link</strong></p>
+		<div class="card mt-3">
+			<h3 class="card-header text-center bg-warning">Warning!</h3>
+			<div class="card-body">
+				<p class="card-text text-center">Ooops...... You have entered an YouTube link which is a link of
+					<strong>YouTube
+						Playlist</strong>.
+					Please
+					not enter <strong>YouTube Playlist link</strong><br>
+					following is the playlist details</p>
+				<div class="card border-info mx-auto my-4 boxShadow" style="width: 24rem;">
+					<div class="card-body">
+						<img class="card-img-top" src="{{dataDict.thumbnail}}" alt="Card image cap">
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">{{dataDict.title}} . {{dataDict.linkCount}} Videos</h5>
+						<hr>
+						<h6 class="card-subtitle mb-2 text-muted border-info">
+							{{dataDict.uploader}}</h6>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	{% else %}
@@ -143,6 +161,11 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 		crossorigin="anonymous"></script>
+	<script>
+		window.addEventListener('load', () => {
+			// location.href = location.origin;
+		})
+	</script>
 </body>
 
 </html>

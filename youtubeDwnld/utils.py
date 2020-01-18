@@ -10,7 +10,7 @@ def get_playlist_info(URL):
     playlistInfo = get_video_details(urls[0])
     playlistInfo['title'] = playlist.title
     playlistInfo.update({
-        'linkCount': playlist.video_urls
+        'linkCount': len(playlist.video_urls)
     })
     return playlistInfo
 
