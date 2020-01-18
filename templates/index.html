@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="en">
 
@@ -11,73 +13,8 @@
 		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
 	<title>YouTube Downloader</title>
-	<style>
-		body {
-			background-color: rgba(8, 177, 207, 0.842);
-		}
-
-		.headFont {
-			font-family: 'Raleway', sans-serif;
-			font-size: 65px;
-			font-weight: bold;
-			color: rgba(7, 86, 105, 0.842);
-			text-shadow: 4px 5px 6px rgba(7, 141, 251, 0.746);
-		}
-
-		.btn-font {
-			font-family: 'Ubuntu', sans-serif;
-			font-size: 20px;
-			padding: 0px;
-		}
-
-		#downloadTab a {
-			margin-top: 10px;
-			margin-left: 10px;
-			color: white;
-		}
-
-		.input-group-prepend span {
-			font-size: 16.4px;
-			width: 70px;
-			font-weight: bold;
-		}
-
-		.color-change {
-			border-radius: 5px;
-			padding: 4px 25px;
-			cursor: pointer;
-			color: #fff;
-			background-color: #00A6FF;
-			font-size: 18px;
-			font-family: 'Roboto';
-			font-weight: 100;
-			border: 1px solid #fff;
-			box-shadow: 2px 2px 5px #AFE9FF;
-			transition-duration: 0.5s;
-			-webkit-transition-duration: 0.5s;
-			-moz-transition-duration: 0.5s;
-		}
-
-		.color-change:hover {
-			color: #006398;
-			border: 1px solid #006398;
-			box-shadow: 2px 2px 20px #AFE9FF;
-		}
-
-		button.color-change {
-			-webkit-appearance: none;
-			-moz-appearance: none;
-		}
-
-		hr {
-			border-top: 1px solid #0169D9;
-		}
-
-		.boxShadow {
-			box-shadow: 5px 10px 18px #888888
-		}
-	</style>
 </head>
 
 <body>

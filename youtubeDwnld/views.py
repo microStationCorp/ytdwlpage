@@ -1,77 +1,22 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-# import pafy
 import youtube_dl
+from . import utils
 
 
 def home(request):
     URL = request.GET.get('urlBox')
     if URL != None:
         try:
-            if URL.find('&list') != -1:
-                return render(request, 'index.html', {'mflag': 'True'})
+            if URL.find('list') != -1:  # if true it is a playlist
+                playlist_info = utils.get_playlist_info(URL)
+                return render(request, 'index.html', {'mflag': 'True', 'dataDict': playlist_info})
             else:
-                ydl = youtube_dl.YoutubeDL({'outtmpl': '%(id)s%(ext)s'})
-
-                with ydl:
-                    result = ydl.extract_info(
-                        URL,
-                        download=False  # We just want to extract the info
-                    )
-                html = dict()
-                html.update({
-                    'uploader': f"{result['uploader']}",
-                    'title': f"{result['title']}",
-                    'thumbnail': result['thumbnail'],
-                    'description': f"{result['description']}"
-                })
-                formats = result['formats']
-                html.update({
-                    'formats': {
-                        'video': [],
-                        'videoWoAudio': [],
-                        'audio': [],
-                        'others': []
-                    }
-                })
-
-                for format in formats:
-                    list = format['format'].split(' - ')
-                    if format['height'] != None and format['width'] != None:
-                        if format['asr'] == None and format['fps'] != None:
-                            html['formats']['videoWoAudio'].append({
-                                'ext': f"{format['ext']}",
-                                'format': f"{list[1]}",
-                                'url': f"{format['url']}",
-                                'asr': f"{format['asr']}",
-                                'fps': f"{format['fps']}"
-                            })
-                        else:
-                            html['formats']['video'].append({
-                                'ext': f"{format['ext']}",
-                                'format': f"{list[1]}",
-                                'url': f"{format['url']}",
-                                'asr': f"{format['asr']}",
-                                'fps': f"{format['fps']}"
-                            })
-                    elif format['height'] == None and format['width'] == None:
-                        html['formats']['audio'].append({
-                            'ext': f"{format['ext']}",
-                            'format': f"{list[1]}",
-                            'url': f"{format['url']}",
-                            'asr': f"{format['asr']}",
-                            'fps': f"{format['fps']}",
-                            'abr': f"{format['abr']}"
-                        })
-                    else:
-                        html['formats']['others'].append({
-                            'ext': f"{format['ext']}",
-                            'format': f"{list[1]}",
-                            'url': f"{format['url']}",
-                            'asr': f"{format['asr']}",
-                            'fps': f"{format['fps']}"
-                        })
-                return render(request, 'index.html', {'aflag': 'True', 'dataDict': html})
+                video_data = utils.get_video_details(
+                    URL)  # get the video details
+                video_data = utils.get_video_formats(
+                    URL, video_data)  # get the video formats
+                return render(request, 'index.html', {'aflag': 'True', 'dataDict': video_data})
         except:
             return render(request, 'index.html', {'eflag': 'True'})
     else:
@@ -80,9 +25,11 @@ def home(request):
 
 def dmca(request):
     return render(request, 'DMCA.html')
-    
+
+
 def cu(request):
     return render(request, 'cu.html')
+
 
 def docp(request):
     return render(request, 'docpage.html')
