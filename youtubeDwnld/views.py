@@ -33,3 +33,7 @@ def cu(request):
 
 def docp(request):
     return render(request, 'docpage.html')
+
+
+def search(request):
+    return render(request, 'search.html')
