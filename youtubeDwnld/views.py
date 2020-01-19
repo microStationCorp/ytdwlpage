@@ -35,5 +35,6 @@ def docp(request):
     return render(request, 'docpage.html')
 
 
-def search(request):
-    return render(request, 'search.html')
+# def search(request):
+#     value = request.GET.get('searchName')
+#     return render(request, 'index.html', {'searchRes': value})

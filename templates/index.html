@@ -57,17 +57,15 @@
 		<div class="card border-primary" id="formBox">
 			<div class="card-header">
 				<ul class="nav nav-pills card-header-pills">
-					<li class="nav-item" id="home">
-						<a class="nav-link active" href="../">URL</a>
+					<li class="nav-item">
+						<a id="home" class="nav-link active" href="#">URL</a id="home">
 					</li>
-					<li class="nav-item" id="search">
-						<a class="nav-link" href="../search">SEARCH</a>
+					<li class="nav-item">
+						<a id="search" class="nav-link" href="#">SEARCH</a id="search">
 					</li>
 				</ul>
 			</div>
-			<div class="card-body">
-
-				{% block contentSearch %}
+			<div class="card-body" id="form">
 				<form action="" method="GET">
 					<div class="input-group mb-3 mt-2 col-sm-11 mx-auto">
 						<div class="input-group-prepend">
@@ -80,10 +78,7 @@
 					<div class="input-group-append">
 						<button class="btn btn-primary btn-font" type="submit" id="button-addon2">Convert</button>
 					</div>
-
 				</form>
-				{% endblock %}
-
 			</div>
 		</div>
 	</div>
@@ -184,22 +179,8 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 		crossorigin="anonymous"></script>
+	<script src="{% static 'js/code.js' %}"></script>
 
-	<script type="text/javascript">
-		let srch = document.getElementById('search');
-		let home = document.getElementById('home')
-
-		if (location.pathname == '/search/' && srch.firstElementChild.classList['1'] == undefined) {
-			anchor = srch.firstElementChild
-			home.firstElementChild.className = anchor.className
-			anchor.className = anchor.className + ' active'
-		}
-		else if (location.pathname == '/' && home.firstElementChild.classList['1'] == undefined) {
-			anchor = home.firstElementChild
-			srch.firstElementChild.className = anchor.className
-			anchor.className = anchor.className + 'active'
-		}
-	</script>
 </body>
 
 </html>
