@@ -23,5 +23,5 @@ urlpatterns = [
     path('dmca/', views.dmca, name='dmca'),
     path('contactUs/', views.cu, name='contactUs'),
     path('documentation/', views.docp, name='documentation'),
-    # path('search/', views.search, name='search'),
+    path('search/', views.search, name='search'),
 ]

@@ -1,18 +1,58 @@
 {% extends 'index.html' %}
+{% block contentPage %}
 
-{% block contentSearch %}
+<div class="container mb-5">
 
-<form action="/search" method="GET">
-    <div class="input-group mb-3 mt-2 col-sm-11 mx-auto">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+    <div class="card border-primary" id="formBox">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                    <a id="home" class="nav-link" href="../">URL</a id="home">
+                </li>
+                <li class="nav-item">
+                    <a id="search" class="nav-link active">SEARCH</a id="search">
+                </li>
+            </ul>
         </div>
-        <input type="text" class="form-control" placeholder="search video by name" aria-label="search value"
-            aria-describedby="button-addon2" name="searchName">
+        <div class="card-body" id="form">
+            <form action="../search" method="GET">
+                <div class="input-group mb-3 mt-2 col-sm-11 mx-auto">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="search video by name" aria-label="search value"
+                        aria-describedby="button-addon2" name="searchName">
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-primary btn-font" type="submit" id="button-addon2">SEARCH</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="input-group-append">
-        <button class="btn btn-primary btn-font" type="submit" id="button-addon2">SEARCH</button>
+</div>
+{% if sflag %}
+<div class="container border-primary card mb-3">
+    <div class="card-body">
+        <div class="row">
+            {% for item in resultDict %}
+            <div class="card mx-auto mb-3 boxShadow" style="width: 15rem;">
+                <img class="card-img-top" src="{{item.thumbnail}}" alt="Card image cap">
+                <div class="card-body">
+                    <h6 class="card-text">{{item.title}}</h6>
+                    <a href="../?urlBox={{item.link}}" class="btn btn-primary">Get</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-</form>
+</div>
+{% elif eflag %}
+<div class="container  mb-3 text-center">
+    <div class="alert alert-primary" role="alert">
+        <h4 class="alert-heading">No Results Found</h4>
+        <p>Try different keywords</p>
+    </div>
+</div>
+{% endif %}
 
 {% endblock %}

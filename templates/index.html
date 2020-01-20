@@ -53,15 +53,14 @@
 
 	{% block contentPage %}
 	<div class="container mb-5">
-
 		<div class="card border-primary" id="formBox">
 			<div class="card-header">
 				<ul class="nav nav-pills card-header-pills">
 					<li class="nav-item">
-						<a id="home" class="nav-link active" href="#">URL</a id="home">
+						<a id="home" class="nav-link active">URL</a id="home">
 					</li>
 					<li class="nav-item">
-						<a id="search" class="nav-link" href="#">SEARCH</a id="search">
+						<a id="search" class="nav-link" href="/search">SEARCH</a id="search">
 					</li>
 				</ul>
 			</div>
@@ -83,8 +82,8 @@
 		</div>
 	</div>
 
-	{% if aflag %}
 
+	{% if aflag %}
 	<div class="container border-primary card mb-3">
 		<div class="card-body">
 			<div class="row">
@@ -165,11 +164,15 @@
 			</div>
 		</div>
 	</div>
-	{% else %}
+	{% elif sflag %}
+	{% block contenSearch %}
 
+	{% endblock %}
+	{% else %}
 	{% endif %}
 
 	{% endblock %}
+
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
 		crossorigin="anonymous"></script>
@@ -179,7 +182,6 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 		crossorigin="anonymous"></script>
-	<script src="{% static 'js/code.js' %}"></script>
 
 </body>
 

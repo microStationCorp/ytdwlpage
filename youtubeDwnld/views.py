@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import youtube_dl
 from . import utils
+from youtube_search import YoutubeSearch
 
 
 def home(request):
@@ -35,6 +36,20 @@ def docp(request):
     return render(request, 'docpage.html')
 
 
-# def search(request):
-#     value = request.GET.get('searchName')
-#     return render(request, 'index.html', {'searchRes': value})
+def search(request):
+    query = request.GET.get('searchName')
+    if query == None:
+        return render(request, 'search.html')
+    else:
+        video_info = YoutubeSearch(query, max_results=10).to_dict()
+        resultDict = []
+        if len(video_info) != 0:
+            for item in video_info:
+                resultDict.append({
+                    'title': item['title'],
+                    'link': item['link'],
+                    'thumbnail': item['thumbnail']
+                })
+            return render(request, 'search.html', {'sflag': 'True', 'resultDict': resultDict})
+        else:
+            return render(request, 'search.html', {'eflag': 'True'})
