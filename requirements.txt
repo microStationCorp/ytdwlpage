@@ -1,0 +1,5 @@
+pytube==9.5.3
+requests==2.21.0
+youtube_dl==2020.1.15
+Django==3.0.2
+beautifulsoup4==4.8.2
