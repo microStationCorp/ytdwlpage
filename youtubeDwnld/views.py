@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import youtube_dl
 from . import utils
-from youtube_search import YoutubeSearch
+# from youtube_search import YoutubeSearch
 
 
 def home(request):
@@ -41,7 +41,7 @@ def search(request):
     if query == None:
         return render(request, 'search.html')
     else:
-        video_info = YoutubeSearch(query, max_results=10).to_dict()
+        video_info = utils.YoutubeSearch(query, max_results=10).to_dict()
         resultDict = []
         if len(video_info) != 0:
             for item in video_info:
