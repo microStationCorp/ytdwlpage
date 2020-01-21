@@ -123,3 +123,9 @@ class YoutubeSearch:
                 }
                 results.append(video_info)
         return results
+
+    def to_dict(self):
+        return self.videos
+
+    def to_json(self):
+        return json.dumps({"videos": self.videos}, indent=4)

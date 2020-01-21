@@ -2,7 +2,6 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import youtube_dl
 from . import utils
-# from youtube_search import YoutubeSearch
 
 
 def home(request):
