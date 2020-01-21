@@ -152,6 +152,14 @@ def get_audio_info(URL):
     }
 
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        if len(os.path.join(settings.BASE_DIR, 'static/media')) != 0:
+            files = os.listdir(os.path.join(settings.BASE_DIR, 'static/media'))
+            for file in files:
+                os.remove(
+                    os.path.join(
+                        os.path.join(settings.BASE_DIR, 'static/media'), file
+                    )
+                )
         res = ydl.extract_info(URL, download=True)
         data = dict()
         data.update({
