@@ -8,14 +8,11 @@ def home(request):
     URL = request.GET.get('urlBox')
     if URL != None:
         try:
-            if URL.find('list') != -1:  # if true it is a playlist
+            if URL.find('list') != -1:
                 playlist_info = utils.get_playlist_info(URL)
                 return render(request, 'index.html', {'mflag': 'True', 'dataDict': playlist_info})
             else:
-                video_data = utils.get_video_details(
-                    URL)  # get the video details
-                video_data = utils.get_video_formats(
-                    URL, video_data)  # get the video formats
+                video_data = utils.get_video_formats(URL)
                 return render(request, 'index.html', {'aflag': 'True', 'dataDict': video_data})
         except:
             return render(request, 'index.html', {'eflag': 'True'})

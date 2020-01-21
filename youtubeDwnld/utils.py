@@ -31,8 +31,15 @@ def get_video_details(URL):
     return video_data
 
 
-def get_video_formats(URL, videoData):
+def get_video_formats(URL):
     info = extract_video_info(URL)
+    videoData = dict()
+    videoData.update({
+        'uploader': f"{info['uploader']}",
+        'title': f"{info['title']}",
+        'thumbnail': info['thumbnail'],
+        'description': f"{info['description']}"
+    })
     formats = info['formats']
     videoData.update({
         'formats': {
