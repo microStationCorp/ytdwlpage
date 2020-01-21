@@ -141,6 +141,10 @@ class YoutubeSearch:
 
 
 def get_audio_info(URL):
+    if not os.path.isdir(os.path.join(settings.BASE_DIR, 'static/media')):
+        os.mkdir(
+            os.path.join(settings.BASE_DIR, 'static/media')
+        )
     ydl_opts = {
         'format': 'bestaudio/best',
         'postprocessors': [{
