@@ -7,10 +7,13 @@
         <div class="card-header">
             <ul class="nav nav-pills card-header-pills">
                 <li class="nav-item">
-                    <a id="home" class="nav-link" href="../">URL</a id="home">
+                    <a class="nav-link" href="../">VIDEO</a id="home">
                 </li>
                 <li class="nav-item">
-                    <a id="search" class="nav-link active">SEARCH</a id="search">
+                    <a class="nav-link" href="/audio">AUDIO</a id="home">
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active">SEARCH</a id="search">
                 </li>
             </ul>
         </div>
@@ -39,7 +42,8 @@
                 <img class="card-img-top" src="{{item.thumbnail}}" alt="Card image cap">
                 <div class="card-body">
                     <h6 class="card-text">{{item.title}}</h6>
-                    <a href="../?urlBox={{item.link}}" class="btn btn-primary">Get</a>
+                    <a href="../?urlBox={{item.link}}" class="btn btn-primary">Get Video</a>
+                    <a href="../audio/?audioURL={{item.link}}" class="btn btn-primary">Get audio</a>
                 </div>
             </div>
             {% endfor %}

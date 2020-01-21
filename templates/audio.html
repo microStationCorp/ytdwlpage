@@ -1,0 +1,111 @@
+{% extends 'index.html' %}
+{% block contentPage %}
+<div class="container mb-5">
+
+    <div class="card border-primary" id="formBox">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                    <a class="nav-link" href="../">VIDEO</a id="home">
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active">AUDIO</a id="home">
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/search">SEARCH</a id="search">
+                </li>
+            </ul>
+        </div>
+        <div class="card-body" id="form">
+            <form action="../audio" method="GET">
+                <div class="input-group mb-3 mt-2 col-sm-11 mx-auto">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">URL</span>
+                    </div>
+                    <input type="text" class="form-control"
+                        placeholder="e.g : https://www.youtube.com/watch?v=67aR580Yqw8" aria-label="search value"
+                        aria-describedby="button-addon2" name="audioURL">
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-primary btn-font" type="submit" id="button-addon2">GET AUDIO</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% if auflag %}
+
+<div class="container border-primary card mb-3">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <div class="card border-info text-center mx-auto my-4 boxShadow" style="width: 24rem;">
+                    <div class="card-body">
+                        <img class="card-img-top" src="{{audioData.thumbnail}}" alt="Card image cap">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{audioData.title}}</h5>
+                        <hr>
+                        <h6 class="card-subtitle mb-2 text-muted border-info">
+                            {{audioData.uploader}}</h6>
+                        <hr>
+                        <p class="card-text">{{audioData.description}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div id="downloadTab">
+                    <div class="panel panel-default my-3">
+                        <div class="panel-body">
+
+                            <a href="{{audioData.link}}" class="btn btn-primary boxShadow" style=" min-width: 140px;"
+                                role="button" download>Audio File</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% elif eflag %}
+<div class="container  mb-3">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Error!</h4>
+        <p>Ooops...... You have entered an <strong>invalid YouTube link</strong>.......</p>
+    </div>
+</div>
+{% elif mflag %}
+<div class="container  mb-3">
+    <div class="card border-primary mt-3">
+        <h3 class="card-header text-center bg-warning">Warning!</h3>
+        <div class="card-body">
+            <p class="card-text text-center">Ooops...... You have entered an YouTube link which is a link of
+                <strong>YouTube
+                    Playlist</strong>.
+                Please
+                not enter <strong>YouTube Playlist link</strong><br>
+                following is the playlist details</p>
+            <div class="card border-info mx-auto my-4 boxShadow" style="width: 24rem;">
+                <div class="card-body">
+                    <img class="card-img-top" src="{{dataDict.thumbnail}}" alt="Card image cap">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{dataDict.title}} . {{dataDict.linkCount}} Videos</h5>
+                    <hr>
+                    <h6 class="card-subtitle mb-2 text-muted border-info">
+                        {{dataDict.uploader}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% elif nflag %}
+
+{% else %}
+
+{% endif %}
+
+{% endblock %}

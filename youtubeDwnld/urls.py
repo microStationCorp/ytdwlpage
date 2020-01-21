@@ -24,4 +24,5 @@ urlpatterns = [
     path('contactUs/', views.cu, name='contactUs'),
     path('documentation/', views.docp, name='documentation'),
     path('search/', views.search, name='search'),
+    path('audio/', views.audio, name='audio'),
 ]

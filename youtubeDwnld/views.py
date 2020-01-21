@@ -49,3 +49,19 @@ def search(request):
             return render(request, 'search.html', {'sflag': 'True', 'resultDict': resultDict})
         else:
             return render(request, 'search.html', {'eflag': 'True'})
+
+
+def audio(request):
+    URL = request.GET.get('audioURL')
+    if URL != None:
+        try:
+            if URL.find('list') != -1:
+                playlist_info = utils.get_playlist_info(URL)
+                return render(request, 'index.html', {'mflag': 'True', 'dataDict': playlist_info})
+            else:
+                audioData = utils.get_audio_info(URL)
+                return render(request, 'audio.html', {'auflag': 'True', 'audioData': audioData})
+        except:
+            return render(request, 'audio.html', {'eflag': 'True'})
+    else:
+        return render(request, 'audio.html', {'nflag': 'True'})

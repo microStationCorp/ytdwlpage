@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 import requests
 from pytube import Playlist
 import youtube_dl
+import os
+from . import settings
 
 
 def get_playlist_info(URL):
@@ -136,3 +138,28 @@ class YoutubeSearch:
 
     def to_json(self):
         return json.dumps({"videos": self.videos}, indent=4)
+
+
+def get_audio_info(URL):
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+        'outtmpl': os.path.join(os.path.join(settings.BASE_DIR, 'static/media'), '%(title)s-%(id)s.%(ext)s'),
+    }
+
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        res = ydl.extract_info(URL, download=True)
+        data = dict()
+        data.update({
+            'uploader': res['uploader'],
+            'title': res['title'],
+            'thumbnail': res['thumbnail'],
+            'description': res['description'],
+            'link': 'http://127.0.0.1:8000/static/media/'+os.listdir(os.path.join(settings.BASE_DIR, 'static/media'))[0],
+        })
+
+    return data
