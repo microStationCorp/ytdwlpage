@@ -155,7 +155,7 @@ def get_audio_info(URL):
             'preferredcodec': 'mp3',
             'preferredquality': '192',
         }],
-        'outtmpl': os.path.join(os.path.join(settings.BASE_DIR, 'static/media'), '%(title)s-%(id)s.%(ext)s'),
+        'outtmpl': os.path.join(os.path.join(settings.BASE_DIR, 'static/media'), '%(id)s.%(ext)s'),
     }
 
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
@@ -167,7 +167,7 @@ def get_audio_info(URL):
             'title': res['title'],
             'thumbnail': res['thumbnail'],
             'description': res['description'],
-            'link': 'http://127.0.0.1:8000/static/media/'+f"{res['title']}.mp3",
+            'link': 'http://127.0.0.1:8000/static/media/'+f"{res['id']}.mp3",
         })
 
     return data
@@ -176,16 +176,12 @@ def get_audio_info(URL):
 def delete_expire_files():
     files = os.listdir(os.path.join(settings.BASE_DIR, 'static/media'))
     for file in files:
-        print('in for loop')
         file_mod_time = os.stat(
             os.path.join(
                 os.path.join(settings.BASE_DIR, 'static/media'), file
             )
         ).st_ctime
-        print(time.ctime(file_mod_time))
         expire_time = time.time()-5*60
-        print(time.ctime(expire_time))
-        print(timedelta(seconds=expire_time-file_mod_time))
         if file_mod_time < expire_time:
             os.remove(
                 os.path.join(
