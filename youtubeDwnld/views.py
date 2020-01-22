@@ -62,6 +62,6 @@ def audio(request):
                 audioData = utils.get_audio_info(URL)
                 return render(request, 'audio.html', {'auflag': 'True', 'audioData': audioData})
         except:
-            return render(request, 'audio.html', {'eflag': 'True'})
+            return render(request, 'audio.html', {'eflag': 'true'})
     else:
         return render(request, 'audio.html', {'nflag': 'True'})

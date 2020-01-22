@@ -6,6 +6,8 @@ from pytube import Playlist
 import youtube_dl
 import os
 from . import settings
+import time
+from datetime import timedelta
 
 
 def get_playlist_info(URL):
@@ -141,6 +143,7 @@ class YoutubeSearch:
 
 
 def get_audio_info(URL):
+
     if not os.path.isdir(os.path.join(settings.BASE_DIR, 'static/media')):
         os.mkdir(
             os.path.join(settings.BASE_DIR, 'static/media')
@@ -156,14 +159,7 @@ def get_audio_info(URL):
     }
 
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        if len(os.path.join(settings.BASE_DIR, 'static/media')) != 0:
-            files = os.listdir(os.path.join(settings.BASE_DIR, 'static/media'))
-            for file in files:
-                os.remove(
-                    os.path.join(
-                        os.path.join(settings.BASE_DIR, 'static/media'), file
-                    )
-                )
+        delete_expire_files()
         res = ydl.extract_info(URL, download=True)
         data = dict()
         data.update({
@@ -171,7 +167,28 @@ def get_audio_info(URL):
             'title': res['title'],
             'thumbnail': res['thumbnail'],
             'description': res['description'],
-            'link': 'http://127.0.0.1:8000/static/media/'+os.listdir(os.path.join(settings.BASE_DIR, 'static/media'))[0],
+            'link': 'http://127.0.0.1:8000/static/media/'+f"{res['title']}.mp3",
         })
 
     return data
+
+
+def delete_expire_files():
+    files = os.listdir(os.path.join(settings.BASE_DIR, 'static/media'))
+    for file in files:
+        print('in for loop')
+        file_mod_time = os.stat(
+            os.path.join(
+                os.path.join(settings.BASE_DIR, 'static/media'), file
+            )
+        ).st_ctime
+        print(time.ctime(file_mod_time))
+        expire_time = time.time()-5*60
+        print(time.ctime(expire_time))
+        print(timedelta(seconds=expire_time-file_mod_time))
+        if file_mod_time < expire_time:
+            os.remove(
+                os.path.join(
+                    os.path.join(settings.BASE_DIR, 'static/media'), file
+                )
+            )
