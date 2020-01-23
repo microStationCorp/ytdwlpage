@@ -168,10 +168,13 @@
 			</div>
 		</div>
 	</div>
-	{% elif sflag %}
-	{% block contenSearch %}
-
-	{% endblock %}
+	{% elif nflag %}
+	<div class="container  mb-3">
+		<div class="alert alert-danger" role="alert">
+			<h4 class="alert-heading">Error!</h4>
+			<p>Ooops...... You have entered nothing. please enter a valid youtube video link</p>
+		</div>
+	</div>
 	{% else %}
 	{% endif %}
 

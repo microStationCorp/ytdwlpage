@@ -6,7 +6,11 @@ from . import utils
 
 def home(request):
     URL = request.GET.get('urlBox')
-    if URL != None:
+    if URL == None:
+        return render(request, 'index.html')
+    elif URL == '':
+        return render(request, 'index.html', {'nflag': 'True'})
+    else:
         try:
             if URL.find('list') != -1:
                 playlist_info = utils.get_playlist_info(URL)
@@ -16,8 +20,6 @@ def home(request):
                 return render(request, 'index.html', {'aflag': 'True', 'dataDict': video_data})
         except:
             return render(request, 'index.html', {'eflag': 'True'})
-    else:
-        return render(request, 'index.html')
 
 
 def dmca(request):
@@ -48,12 +50,16 @@ def search(request):
                 })
             return render(request, 'search.html', {'sflag': 'True', 'resultDict': resultDict})
         else:
-            return render(request, 'search.html', {'eflag': 'True'})
+            return render(request, 'search.html', {'eflag': 'True', 'query': query})
 
 
 def audio(request):
     URL = request.GET.get('audioURL')
-    if URL != None:
+    if URL == None:
+        return render(request, 'audio.html')
+    elif URL=='':
+        return render(request, 'audio.html', {'nflag': 'True'})
+    else:
         try:
             if URL.find('list') != -1:
                 playlist_info = utils.get_playlist_info(URL)
@@ -63,5 +69,3 @@ def audio(request):
                 return render(request, 'audio.html', {'auflag': 'True', 'audioData': audioData})
         except:
             return render(request, 'audio.html', {'eflag': 'true'})
-    else:
-        return render(request, 'audio.html', {'nflag': 'True'})
