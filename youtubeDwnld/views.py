@@ -39,15 +39,8 @@ def search(request):
     if query == None:
         return render(request, 'search.html')
     else:
-        video_info = utils.YoutubeSearch(query, max_results=10).to_dict()
-        resultDict = []
-        if len(video_info) != 0:
-            for item in video_info:
-                resultDict.append({
-                    'title': item['title'],
-                    'link': item['link'],
-                    'thumbnail': item['thumbnail']
-                })
+        resultDict = utils.YoutubeSearch(query).video_data
+        if len(resultDict) != 0:
             return render(request, 'search.html', {'sflag': 'True', 'resultDict': resultDict})
         else:
             return render(request, 'search.html', {'eflag': 'True', 'query': query})
@@ -57,7 +50,7 @@ def audio(request):
     URL = request.GET.get('audioURL')
     if URL == None:
         return render(request, 'audio.html')
-    elif URL=='':
+    elif URL == '':
         return render(request, 'audio.html', {'nflag': 'True'})
     else:
         try:

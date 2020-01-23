@@ -44,8 +44,14 @@
                 <img class="card-img-top" src="{{item.thumbnail}}" alt="Card image cap">
                 <div class="card-body">
                     <h6 class="card-text">{{item.title}}</h6>
-                    <a href="../?urlBox={{item.link}}" class="btn btn-primary">Get Video</a>
-                    <a href="../audio/?audioURL={{item.link}}" class="btn btn-primary">Get audio</a>
+                    <hr>
+                    <h6 class="card-text text-muted">{{item.channel}}</h6>
+                    <small class="card-text text-muted">Duration : {{item.duration}}</small>
+                    <hr>
+                    <div>
+                        <a href="../?urlBox={{item.url}}" class="btn btn-primary">Get Video</a>
+                        <a href="../audio/?audioURL={{item.link}}" class="btn btn-primary">Get audio</a>
+                    </div>
                 </div>
             </div>
             {% endfor %}

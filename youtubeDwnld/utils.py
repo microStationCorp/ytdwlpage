@@ -1,4 +1,5 @@
 import json
+from isodate import parse_duration
 import urllib.parse
 from bs4 import BeautifulSoup
 import requests
@@ -104,44 +105,6 @@ def extract_video_info(URL):
     return result
 
 
-class YoutubeSearch:
-
-    def __init__(self, search_terms: str, max_results=None):
-        self.search_terms = search_terms
-        self.max_results = max_results
-        self.videos = self.search()
-
-    def search(self):
-        encoded_search = urllib.parse.quote(self.search_terms)
-        BASE_URL = "https://youtube.com"
-        url = f"{BASE_URL}/results?search_query={encoded_search}&pbj=1"
-        response = BeautifulSoup(requests.get(url).text, "html.parser")
-        results = self.parse_html(response)
-        if self.max_results is not None and len(results) > self.max_results:
-            return results[:self.max_results]
-        return results
-
-    def parse_html(self, soup):
-        results = []
-        for video in soup.select(".yt-uix-tile-link"):
-            if video["href"].startswith("/watch?v="):
-                id = video["href"][video["href"].index("=") + 1:]
-                video_info = {
-                    "title": video["title"],
-                    "link": "https://youtube.com" + video["href"],
-                    "id": id,
-                    'thumbnail': f"http://img.youtube.com/vi/{id}/0.jpg"
-                }
-                results.append(video_info)
-        return results
-
-    def to_dict(self):
-        return self.videos
-
-    def to_json(self):
-        return json.dumps({"videos": self.videos}, indent=4)
-
-
 def get_audio_info(URL):
 
     if not os.path.isdir(os.path.join(settings.BASE_DIR, 'static/media')):
@@ -188,3 +151,52 @@ def delete_expire_files():
                     os.path.join(settings.BASE_DIR, 'static/media'), file
                 )
             )
+
+
+class YoutubeSearch:
+    SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
+    VIDEO_URL = 'https://www.googleapis.com/youtube/v3/videos'
+    BASE_URL = 'https://www.youtube.com/watch?v='
+
+    def __init__(self, search_term):
+        self.search_term = search_term
+        self.ids = self.get_video_id(self.search_term)
+        self.video_data = self.get_videos(self.ids)
+
+    def get_video_id(self, query):
+        search_params = {
+            'part': 'snippet',
+            'q': query,
+            'key': settings.YOUTUBE_DATA_API_KEY,
+            'maxResults': 20,
+            'type': 'video',
+            'order': 'relevance'
+        }
+        sRe = requests.get(self.SEARCH_URL, params=search_params)
+        search_res = sRe.json()['items']
+        video_id = []
+        for item in search_res:
+            video_id.append(item['id']['videoId'])
+        return video_id
+
+    def get_videos(self, id):
+        video_params = {
+            'key': settings.YOUTUBE_DATA_API_KEY,
+            'part': 'snippet,contentDetails',
+            'id': ','.join(id)
+        }
+
+        vRe = requests.get(self.VIDEO_URL, params=video_params)
+
+        video_res = vRe.json()['items']
+        videos = []
+        for item in video_res:
+            videos.append({
+                'title': item['snippet']['title'],
+                'description': item['snippet']['description'],
+                'thumbnail': item['snippet']['thumbnails']['high']['url'],
+                'url': f"{self.BASE_URL}{item['id']}",
+                'channel': item['snippet']['channelTitle'],
+                'duration': f"{parse_duration(item['contentDetails']['duration'])}"
+            })
+        return videos
