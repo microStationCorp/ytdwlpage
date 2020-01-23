@@ -70,4 +70,7 @@ hr {
 	box-shadow: 5px 10px 18px #888888
 }
 
-
+.brdr{
+	width: 5%;
+	margin: auto;
+}
