@@ -79,3 +79,12 @@ hr {
 .myCard{
 	border-radius: 4px;
 }
+
+.myFont{
+	font-family: sans-serif;
+}
+
+.myBt{
+	width:150px;
+	margin: 0px auto;
+}

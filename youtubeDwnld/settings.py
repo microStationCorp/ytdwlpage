@@ -123,3 +123,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+# YOUTUBE_DATA_API_KEY = "AIzaSyD-eHf_k8S86aenCPVapsjzQOZnxKpeifA"

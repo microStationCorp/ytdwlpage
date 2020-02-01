@@ -30,8 +30,8 @@ def cu(request):
     return render(request, 'cu.html')
 
 
-def docp(request):
-    return render(request, 'docpage.html')
+def privacy(request):
+    return render(request, 'privacy.html')
 
 
 def search(request):

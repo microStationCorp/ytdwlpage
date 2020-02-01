@@ -50,7 +50,7 @@
                     <hr>
                     <div>
                         <a href="../?urlBox={{item.url}}" class="btn btn-primary">Get Video</a>
-                        <a href="../audio/?audioURL={{item.link}}" class="btn btn-primary">Get audio</a>
+                        <a href="../audio/?audioURL={{item.url}}" class="btn btn-primary">Get audio</a>
                     </div>
                 </div>
             </div>
@@ -65,6 +65,37 @@
         <p>Try different keywords , instead of "{{query}}"</p>
     </div>
 </div>
+
+{% else %}
+
+<div class="container text-center">
+    <div class="card-group">
+        <div class="card mx-3 boxShadow rounded">
+            <div class="card-body">
+                <h3 class="card-title">Why?</h3>
+                <p class="card-text">Many video editor, meme creator or many students needs videos for new
+                    things creation or study purposes. Nowadays , YouTube is the most bigger video streaming
+                    website. So, they need to download video or audio file from YouTube</p>
+            </div>
+        </div>
+        <div class="card mx-3 boxShadow rounded">
+            <div class="card-body">
+                <h3 class="card-title">How?</h3>
+                <p class="card-text">We all know that, YouTube doesn't allow to download video from their
+                    website. So, we are here to solve many creators' and students' problem with very ease,
+                    reliable and fast process, without any log in or pricing problem</p>
+            </div>
+        </div>
+        <div class="card mx-3 boxShadow rounded">
+            <div class="card-body">
+                <h3 class="card-title">What?</h3>
+                <p class="card-text">So, for those who want save their time, who don't want harmful links, who
+                    want clean user friendly UI, we are create `<a href="/">YTDownloader.com</a>`</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endif %}
 
 {% endblock %}

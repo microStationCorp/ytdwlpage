@@ -13,7 +13,7 @@
 		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/myS.css' %}">
 	<title>YouTube Downloader</title>
 	<style>
 	</style>
@@ -33,7 +33,7 @@
 					<a class="nav-link" href="../">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/documentation">Documentation</a>
+					<a class="nav-link" href="/documentation">Privacy Policy</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/contactUs">Contact us</a>
@@ -178,10 +178,6 @@
 		</div>
 	</div>
 	{% else %}
-	{% endif %}
-
-	{% endblock %}
-
 
 	<div class="container text-center">
 		<div class="card-group">
@@ -211,9 +207,15 @@
 		</div>
 	</div>
 
+	{% endif %}
 
-	<footer class="footer mt-5">
-		<div class="text-center">© 2020 Copyright: microStationCorp. All rights reserved.
+	{% endblock %}
+
+
+
+
+	<footer class="footer mt-5 mb-1">
+		<div class="text-center text-light">© 2020 Copyright: microStationCorp. All rights reserved.
 		</div>
 	</footer>
 
@@ -227,7 +229,6 @@
 		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="{% static 'js/code.js' %}"></script>
-	<script src="https://kit.fontawesome.com/55decd08f0.js" crossorigin="anonymous"></script>
 
 </body>
 
